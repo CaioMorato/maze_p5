@@ -11,8 +11,8 @@ const cellWidth = Math.floor(gridWidth / numberOfCells_Row);
 function setup() {
   createCanvas(gridWidth, gridHeight);
 
-  for (let cellPosition_X = 0; cellPosition_X < gridWidth; cellPosition_X += cellWidth) {
-    for (let cellPosition_Y = 0; cellPosition_Y < gridHeight; cellPosition_Y += cellHeigth) {
+  for (let cellPosition_X = 0; cellPosition_X < gridWidth; cellPosition_X += 1) {
+    for (let cellPosition_Y = 0; cellPosition_Y < gridHeight; cellPosition_Y += 1) {
       let cell = new Cell(cellPosition_X, cellPosition_Y);
       grid.push(cell);
     }
@@ -27,10 +27,23 @@ function draw() {
 }
 
 function Cell(position_x, position_y) {
-  this.position_x = position_x;
-  this.position_y = position_y;
+  this.x_position_border_pixel = position_x;
+  this.y_position_border_pixel = position_y;
 
   this.show = function () {
-    rect(position_x, position_y, cellWidth, cellHeigth);
+    let pos_x_pixel = this.x_position_border_pixel * cellWidth;
+    let pos_y_pixel = this.y_position_border_pixel * cellHeigth;
+
+    // top line
+    line(pos_x_pixel, pos_y_pixel, pos_x_pixel + cellWidth, pos_y_pixel);
+
+    // bottom line
+    line(pos_x_pixel, pos_y_pixel + cellHeigth, pos_x_pixel + cellWidth, pos_y_pixel + cellHeigth);
+
+    // left line
+    line(pos_x_pixel, pos_y_pixel, pos_x_pixel, pos_y_pixel + cellHeigth);
+
+    // right line
+    line(pos_x_pixel + cellWidth, pos_y_pixel, pos_x_pixel + cellWidth, pos_y_pixel + cellHeigth);
   };
 }
