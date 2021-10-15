@@ -34,16 +34,31 @@ function Cell(position_x, position_y) {
     let pos_x_pixel = this.x_position_border_pixel * cellWidth;
     let pos_y_pixel = this.y_position_border_pixel * cellHeigth;
 
-    // top line
-    line(pos_x_pixel, pos_y_pixel, pos_x_pixel + cellWidth, pos_y_pixel);
+    this.borders = [true, true, true, true];
 
-    // bottom line
-    line(pos_x_pixel, pos_y_pixel + cellHeigth, pos_x_pixel + cellWidth, pos_y_pixel + cellHeigth);
+    if (this.borders[0]) {
+      // top line
+      line(pos_x_pixel, pos_y_pixel, pos_x_pixel + cellWidth, pos_y_pixel);
+    }
 
-    // left line
-    line(pos_x_pixel, pos_y_pixel, pos_x_pixel, pos_y_pixel + cellHeigth);
+    if (this.borders[2]) {
+      // bottom line
+      line(
+        pos_x_pixel,
+        pos_y_pixel + cellHeigth,
+        pos_x_pixel + cellWidth,
+        pos_y_pixel + cellHeigth
+      );
+    }
 
-    // right line
-    line(pos_x_pixel + cellWidth, pos_y_pixel, pos_x_pixel + cellWidth, pos_y_pixel + cellHeigth);
+    if (this.borders[1]) {
+      // left line
+      line(pos_x_pixel, pos_y_pixel, pos_x_pixel, pos_y_pixel + cellHeigth);
+    }
+
+    if (this.borders[3]) {
+      // right line
+      line(pos_x_pixel + cellWidth, pos_y_pixel, pos_x_pixel + cellWidth, pos_y_pixel + cellHeigth);
+    }
   };
 }
